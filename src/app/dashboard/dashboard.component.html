@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-2 shadow d-flex justify-content-top align-items-center flex-column" *ngIf="sidebarStatus">
+    <h4 class="mt-5 text-center fw-bolder"><a routerLink="/dashboard">Home</a></h4>
+    <h4 class="my-4 text-center fw-bolder"><a routerLink="/users">User</a></h4>
+  </div>
+  <div class="col-9">
+    <div class="row">
+      <p class="m-3 text-end fw-bolder">Logged At:{{adminLoggedStstus | date:'medium'}}</p>
+        <div class="col-8">
+            <div class="card m-5 d-flex justify-content-evenly">
+              
+                <h1><i class="fa-solid fa-bars fs-1 me-4 m-3" (click)="menubarClicked()"></i>Welcome {{adminName}}</h1>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <app-calender></app-calender>
+              </div>
+              <div class="col-6">
+                <app-pie-chart></app-pie-chart>
+              </div>   
+            </div>
+        </div>
+       
+        <div class="col-4">
+            <div class="admin-card text-center shadow m-4 p-3 mt-5">
+                <h3 class="text-center">Admin Details</h3>
+                <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/female-user-icon-clip-art--30.png" alt="" width="200px" height="200px" style="margin-bottom:20px;">
+                <input type="text" placeholder="Name" class="form-control my-3" [(ngModel)]="adminDetails.name" name="adminName">
+                <input type="text" placeholder="Name" class="form-control mb-3" [(ngModel)]="adminDetails.password" name="adminpswd">
+                <div class="m-4 button text-center">
+                    <button class="btn btn-success" (click)="updateAdmin()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>

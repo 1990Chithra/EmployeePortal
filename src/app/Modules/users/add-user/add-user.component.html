@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-2 shadow d-flex justify-content-top align-items-center flex-column">
+      <h4 class="mt-5 text-center fw-bolder"><a routerLink="/dashboard">Home</a></h4>
+      <h4 class="my-4 text-center fw-bolder"><a routerLink="/users">User</a></h4>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <h3 class="text-center m-5 fw-bolder">Add User</h3>
+        <form #addUserForm="ngForm" (ngSubmit)="addUser()" class="w-50 m-5">
+            <input name="id" [(ngModel)]="user.id" type="text" placeholder="Id" class="form-control mb-3" #id="ngModel" required="" pattern="[0-9]*">
+            <div *ngIf="id.invalid && id.touched" class="text-danger fw-bolder">*Invalid Id</div>
+            <input name="name" [(ngModel)]="user.name" type="text"  placeholder="Name" class="form-control mb-3" #name="ngModel" required="">
+            <div *ngIf="name.invalid && name.touched" class="text-danger fw-bolder">*Invalid Name</div>
+            <input name="email" [(ngModel)]="user.email" type="text" placeholder="Email" class="form-control mb-3" #email="ngModel" required="">
+            <div *ngIf="email.invalid && email.touched" class="text-danger fw-bolder">*Invalid Email</div>
+            <label for="Status">Select Employee Status</label>
+            <select name="active" type="text" id="Status" class="form-control mb-3" [(ngModel)]="user.active" #active="ngModel" #status="ngModel" required="">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+            <div *ngIf="status.invalid && status.touched" class="text-danger fw-bolder">*Select Status</div>
+
+            <div class="text-center">
+                <button [disabled]="addUserForm.invalid" class="btn btn-success">Save</button>
+            </div>
+        </form>
+        
+          
+      </div>
+    </div>
+  
+  </div>

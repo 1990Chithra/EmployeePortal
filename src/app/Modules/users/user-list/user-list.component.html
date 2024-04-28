@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-2 shadow d-flex justify-content-top align-items-center flex-column">
+      <h4 class="mt-5 text-center fw-bolder"><a routerLink="/dashboard">Home</a></h4>
+      <h4 class="my-4 text-center fw-bolder"><a routerLink="/users">User</a></h4>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <h3>User List</h3>
+        <div class="d-flex p-4 m-4 justify-content-between">
+            <input type="text" placeholder="Search by Name" class="form-control m-3 w-75" [(ngModel)]="searchText">
+            <button mat-button [matMenuTriggerFor]="menu" mat-raised-button color="accent">Menu</button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="sortById()">Sort By Id</button>
+            <button mat-menu-item (click)="sortByName()">Sort By Name</button>
+            </mat-menu>
+            <button class="btn btn-primary btn-sm" (click)="generatePDF()">Export as pdf</button>
+        </div>
+        
+        <div class="mb-3">
+            <button class="btn btn-success" style="float:right;" routerLink="/users/add">Add<i class="fa-solid fa-user-plus"></i></button>
+        </div>
+        <table class="table align-middle mb-0 bg-white shadow">
+            <thead class="bg-light">
+                <tr class=" ">
+                    <th class=" ">Id</th>
+                    <th class="">Name</th>
+                    <th class="">Email</th>
+                    <th class=" ">Status</th>
+                    <th class=" ">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of allUsers | search:searchText | paginate: { itemsPerPage: 5, currentPage: p }" [hidden]="user.id==='1' " class=" ">
+                    <td class=" ">{{user.id}}</td>
+                    <td class="">{{user.name}}</td>
+                    <td class=" ">{{user.email}}</td>
+
+                    <td [ngClass]="user.active==='1'? 'btn  text-success  fw-bolder':'btn fw-bolder text-danger' "  class=" ">{{user.active=="1"? "Active":"Inactive"}}</td>
+
+                    <td class=" ">
+                        <div class="d-flex ">
+                            <button class="btn  me-5" routerLink="edit/{{user.id}}"><i class="fa-solid fa-pen text-primary"></i></button>
+                            <button (click)="deleteUser(user.id)" class="btn"><i class="fa-solid fa-trash text-danger"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center fw-bolder my-5">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+          
+      </div>
+    </div>
+  
+  </div>
